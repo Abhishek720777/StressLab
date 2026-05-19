@@ -1,0 +1,23 @@
+.peak-label {
+  opacity: 0;
+  animation: label-appear 4s ease-in-out infinite;
+}
+
+@keyframes label-appear {
+  0%, 50%, 100% { opacity: 0; }
+  58%, 85%      { opacity: 0.7; }
+}
+
+.graph-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.2);
+  margin-top: 10px;
+  letter-spacing: 0.3px;
+}
+
+.field__label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

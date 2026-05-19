@@ -1,0 +1,153 @@
+.history-page { max-width: 1100px; }
+
+.history-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 4px;
+}
+
+.filter-tab {
+  padding: 6px 14px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.filter-tab:hover { color: var(--text-1); background: var(--surface-2); }
+.filter-tab--active { background: var(--text-1); color: #fff; font-weight: 600; }
+
+.search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--text-3);
+  pointer-events: none;
+}
+
+.search-input {
+  padding: 9px 12px 9px 36px;
+  font-size: 13.5px;
+  color: var(--text-1);
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  outline: none;
+  width: 240px;
+  font-family: var(--font-body);
+  transition: border-color 0.2s;
+}
+.search-input:focus { border-color: var(--border-strong); }
+.search-input::placeholder { color: var(--text-3); }
+
+/* ─── TABLE ──────────────────────────────────────────── */
+
+.history-table-wrap {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  min-width: 900px;
+}
+
+.history-table th {
+  text-align: left;
+  padding: 11px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-2);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.history-table td {
+  padding: 13px 14px;
+  color: var(--text-1);
+  border-bottom: 1px solid var(--border);
+}
+.history-table tr:last-child td { border-bottom: none; }
+
+.history-row { cursor: pointer; transition: background 0.12s; }
+.history-row:hover td { background: var(--bg); }
+
+.td-id { font-family: var(--font-mono); font-size: 12px; color: var(--text-3); }
+.td-name { font-weight: 600; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.td-mono { font-family: var(--font-mono); font-size: 12.5px; color: var(--text-2); }
+.td-date { font-size: 12.5px; color: var(--text-3); white-space: nowrap; }
+.td-action { text-align: right; }
+
+.val-green { color: var(--green); font-weight: 600; }
+.val-amber { color: var(--amber); font-weight: 600; }
+.val-red   { color: var(--red);   font-weight: 600; }
+
+.status-badge { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.status-badge--green  { background: #F0FDF4; color: #15803D; }
+.status-badge--blue   { background: #EFF6FF; color: #1D4ED8; }
+.status-badge--amber  { background: #FFFBEB; color: #B45309; }
+.status-badge--red    { background: #FEF2F2; color: #B91C1C; }
+
+.btn-ghost-sm {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blue);
+  background: none;
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.btn-ghost-sm:hover { border-color: var(--blue); background: #EFF6FF; }
+.btn-ghost-sm--live { color: #059669; }
+.btn-ghost-sm--live:hover { border-color: #059669; background: #F0FDF4; }
+
+.empty-state {
+  background: var(--surface);
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius-lg);
+  padding: 56px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.empty-state__icon { font-size: 32px; }
+.empty-state__title { font-size: 15px; font-weight: 700; color: var(--text-1); }
+.empty-state__sub { font-size: 13.5px; color: var(--text-2); }
+
+.loading-center { display: flex; align-items: center; justify-content: center; height: 300px; }
+.spinner { display: inline-block; width: 24px; height: 24px; border: 2.5px solid var(--border); border-top-color: var(--text-1); border-radius: 50%; animation: spin 0.7s linear infinite; }

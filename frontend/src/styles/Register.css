@@ -1,0 +1,91 @@
+.brand-stats {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 32px;
+  padding: 18px 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+}
+
+.brand-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  align-items: center;
+}
+
+.brand-stat__value {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--brand-accent);
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.brand-stat__label {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.brand-stat__divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+/* ─── PASSWORD STRENGTH ──────────────────────────────── */
+
+.password-strength {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.strength-bar {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+}
+
+.strength-bar span {
+  height: 3px;
+  flex: 1;
+  border-radius: 2px;
+  background: var(--border);
+  transition: background 0.3s;
+}
+
+.strength-bar--weak span:nth-child(1) { background: var(--red); }
+.strength-bar--fair span:nth-child(1),
+.strength-bar--fair span:nth-child(2) { background: var(--amber); }
+.strength-bar--strong span { background: var(--green); }
+
+.strength-label {
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.strength-label--weak   { color: var(--red); }
+.strength-label--fair   { color: var(--amber); }
+.strength-label--strong { color: var(--green); }
+
+/* ─── TERMS ──────────────────────────────────────────── */
+
+.form-terms {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--text-3);
+  line-height: 1.6;
+}

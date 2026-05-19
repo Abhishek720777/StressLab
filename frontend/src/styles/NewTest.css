@@ -1,0 +1,137 @@
+.new-test-page { max-width: 1000px; }
+
+.nt-grid { display: grid; grid-template-columns: 1fr 380px; gap: 20px; align-items: start; }
+
+.nt-card { background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 16px; }
+.nt-card:last-child { margin-bottom: 0; }
+.nt-card__title { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text-1); margin-bottom: 20px; letter-spacing: -0.2px; }
+
+.nt-right { display: flex; flex-direction: column; gap: 0; }
+
+.nt-field { display: flex; flex-direction: column; gap: 7px; margin-bottom: 20px; }
+.nt-field:last-child { margin-bottom: 0; }
+
+.nt-label { font-size: 13px; font-weight: 600; color: var(--text-1); }
+.nt-hint { font-weight: 400; color: var(--text-3); font-size: 12px; }
+
+.nt-input {
+  padding: 10px 12px;
+  font-size: 14px;
+  color: var(--text-1);
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  font-family: var(--font-body);
+}
+.nt-input:focus { border-color: var(--text-1); background: var(--surface); }
+.nt-mono { font-family: var(--font-mono); font-size: 12px; }
+
+.nt-textarea {
+  padding: 10px 12px;
+  font-size: 13px;
+  color: var(--text-1);
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.2s;
+  line-height: 1.6;
+  font-family: var(--font-body);
+}
+.nt-textarea:focus { border-color: var(--text-1); }
+
+.url-row { display: flex; gap: 8px; }
+
+.method-select {
+  padding: 10px 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-1);
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  outline: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  flex-shrink: 0;
+  transition: border-color 0.2s;
+}
+.method-select:focus { border-color: var(--text-1); }
+
+.url-input { flex: 1; }
+.num-input { width: 80px; text-align: center; flex-shrink: 0; padding: 6px 8px; font-family: var(--font-mono); font-size: 13px; }
+
+.slider-wrap { display: flex; align-items: center; gap: 12px; }
+
+.slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border);
+  outline: none;
+  cursor: pointer;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--text-1);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+.nt-hint-text { font-size: 12px; color: var(--text-3); }
+
+.nt-summary {
+  background: var(--surface-2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nt-summary__label { font-size: 13px; color: var(--text-2); font-weight: 500; }
+.nt-summary__value { font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--text-1); }
+
+.nt-actions { display: flex; gap: 10px; }
+
+.btn-secondary {
+  flex: 1;
+  padding: 12px;
+  background: var(--surface);
+  color: var(--text-1);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.btn-secondary:hover:not(:disabled) { border-color: var(--border-strong); background: var(--surface-2); }
+.btn-secondary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-primary-lg {
+  flex: 2;
+  padding: 12px;
+  background: var(--text-1);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn-primary-lg:hover:not(:disabled) { background: #000; transform: translateY(-1px); }
+.btn-primary-lg:disabled { opacity: 0.6; cursor: not-allowed; }

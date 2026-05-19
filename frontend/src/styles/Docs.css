@@ -1,0 +1,151 @@
+.docs-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding-bottom: 60px;
+}
+
+.docs-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 24px;
+}
+
+.docs-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.docs-section:hover {
+  box-shadow: var(--shadow);
+}
+
+.docs-section__title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-1);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1.5px solid var(--border);
+  padding-bottom: 10px;
+}
+
+.docs-section__title svg {
+  color: var(--text-1);
+}
+
+.docs-p {
+  font-size: 14.5px;
+  color: var(--text-2);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.docs-p strong {
+  color: var(--text-1);
+  font-weight: 600;
+}
+
+/* ─── STEPS LIST ─────────────────────────────────────── */
+
+.docs-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 24px 0;
+}
+
+.docs-step {
+  display: flex;
+  gap: 16px;
+}
+
+.docs-step__num {
+  width: 28px;
+  height: 28px;
+  background: var(--text-1);
+  color: white;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.docs-step__content {
+  flex: 1;
+}
+
+.docs-step__title {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text-1);
+  margin-bottom: 6px;
+}
+
+/* ─── CODE CALLOUTS ──────────────────────────────────── */
+
+.docs-code-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-1);
+  overflow-x: auto;
+  margin: 16px 0;
+  line-height: 1.5;
+}
+
+.docs-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.docs-badge--get { background: rgba(5, 150, 105, 0.1); color: var(--green); }
+.docs-badge--post { background: rgba(27, 110, 243, 0.1); color: var(--blue); }
+.docs-badge--cookie { background: rgba(217, 119, 6, 0.1); color: var(--amber); }
+
+/* ─── METRICS TABLE ──────────────────────────────────── */
+
+.docs-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.docs-table th, .docs-table td {
+  border: 1px solid var(--border);
+  padding: 12px 14px;
+  text-align: left;
+}
+
+.docs-table th {
+  background: var(--bg);
+  font-weight: 700;
+  color: var(--text-1);
+}
+
+.docs-table td {
+  color: var(--text-2);
+}
+
+.docs-table strong {
+  color: var(--text-1);
+}

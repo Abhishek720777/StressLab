@@ -7,6 +7,7 @@ import NewTest from './pages/NewTest.jsx'
 import TestRunner from './pages/TestRunner.jsx'
 import Results from './pages/Results.jsx'
 import History from './pages/History.jsx'
+import Docs from './pages/Docs.jsx'
 
 function PrivateRoute({ children }) {
   const { token } = useAuth()
@@ -29,6 +30,7 @@ function AppRoutes() {
       <Route path="/run/:runId" element={<PrivateRoute><TestRunner /></PrivateRoute>} />
       <Route path="/results/:runId" element={<PrivateRoute><Results /></PrivateRoute>} />
       <Route path="/history" element={<PrivateRoute><History /></PrivateRoute>} />
+      <Route path="/docs" element={<PrivateRoute><Docs /></PrivateRoute>} />
     </Routes>
   )
 }

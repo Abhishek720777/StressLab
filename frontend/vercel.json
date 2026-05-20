@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "http://stresslab-backend-env.eba-r8i3zspq.ap-south-2.elasticbeanstalk.com/api/:path*"
+    },
+    {
+      "source": "/ws/:path*",
+      "destination": "http://stresslab-backend-env.eba-r8i3zspq.ap-south-2.elasticbeanstalk.com/ws/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

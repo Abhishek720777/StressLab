@@ -1,10 +1,10 @@
-# ⚡ StressLab
+# StressLab
 
 A full-stack, real-time stress testing and performance monitoring web application. Point it at any HTTP endpoint, define virtual user concurrency loops, and watch your server's breaking boundaries, database latencies, and error ceilings unfold live in high-fidelity dashboards.
 
 ---
 
-## 🏗️ Technical Architecture
+## Technical Architecture
 
 StressLab operates on a high-efficiency **Virtual User Loop** model rather than throwing unbounded threads at a server:
 * **Fixed Thread Pools**: Spawns a dedicated thread pool corresponding exactly to your configured `concurrentUsers`.
@@ -15,7 +15,7 @@ StressLab operates on a high-efficiency **Virtual User Loop** model rather than 
 
 ---
 
-## 🛠️ Quick Local Setup
+## Quick Local Setup
 
 ### 1. Database Configuration
 1. Open your local MySQL CLI.
@@ -50,7 +50,7 @@ Open your browser and navigate to **`http://localhost:5173`**!
 
 ---
 
-## 📖 How to Use the Platform
+## How to Use the Platform
 
 ### 1. Creating and Configuring a Test
 Go to **New Test** and fill out the fields:
@@ -77,7 +77,7 @@ Since `HttpOnly` cookies can't be read by JavaScript, grab the cookie value from
 
 ---
 
-## 📈 Interpreting Metrics Like a Pro
+## Interpreting Metrics Like a Pro
 
 StressLab's results report breaks performance down into key metrics:
 

@@ -8,6 +8,7 @@ import TestRunner from './pages/TestRunner.jsx'
 import Results from './pages/Results.jsx'
 import History from './pages/History.jsx'
 import Docs from './pages/Docs.jsx'
+import Home from './pages/Home.jsx'
 
 function PrivateRoute({ children }) {
   const { token } = useAuth()
@@ -22,7 +23,7 @@ function PublicRoute({ children }) {
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/dashboard" replace />} />
+      <Route path="/" element={<Home />} />
       <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
       <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
       <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />

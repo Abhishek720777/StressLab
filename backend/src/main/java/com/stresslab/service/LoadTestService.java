@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.CacheEvict;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -42,6 +44,7 @@ public class LoadTestService {
         this.loadTestExecutor = loadTestExecutor;
     }
 
+    @CacheEvict(value = "runs", key = "#email")
     public TestRunResponse startRun(Long configId, String email) {
         User user = getUser(email);
         TestConfig config = configService.getEntity(configId, email);
@@ -78,12 +81,14 @@ public class LoadTestService {
         return TestRunResponse.from(run);
     }
 
+    @Cacheable(value = "runs", key = "#email")
     public List<TestRunResponse> getAllRuns(String email) {
         User user = getUser(email);
         return runRepository.findByUserOrderByCreatedAtDesc(user)
                 .stream().map(TestRunResponse::from).collect(Collectors.toList());
     }
 
+    @Cacheable(value = "results", key = "#runId")
     public TestResultResponse getFullResults(Long runId, String email) {
         User user = getUser(email);
         TestRun run = runRepository.findById(runId)
@@ -101,6 +106,7 @@ public class LoadTestService {
         );
     }
 
+    @CacheEvict(value = "runs", key = "#email")
     public void abortRun(Long runId, String email) {
         User user = getUser(email);
         TestRun run = runRepository.findById(runId)

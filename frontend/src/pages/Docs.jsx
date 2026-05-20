@@ -171,6 +171,43 @@ export default function Docs() {
             </ul>
           </div>
 
+          {/* SECTION 6: TESTING LOCALHOST */}
+          <div className="docs-section">
+            <h2 className="docs-section__title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Testing Localhost from the Cloud (Ngrok)
+            </h2>
+            <p className="docs-p">
+              If StressLab is deployed to the cloud, it cannot directly target an application running on your computer's <code>localhost</code> (since the cloud server has no access to your internal network). To test your un-deployed local code, you must create a secure tunnel:
+            </p>
+            <div className="docs-steps" style={{ margin: '14px 0' }}>
+              <div className="docs-step">
+                <div className="docs-step__num">1</div>
+                <div className="docs-step__content">
+                  <div className="docs-step__title">Start your local app</div>
+                  <p className="docs-p">Ensure your API is running on your machine (e.g., at port 5000).</p>
+                </div>
+              </div>
+              <div className="docs-step">
+                <div className="docs-step__num">2</div>
+                <div className="docs-step__content">
+                  <div className="docs-step__title">Create a secure tunnel</div>
+                  <p className="docs-p">Use a free tool like <a href="https://ngrok.com/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--brand-accent)' }}>ngrok</a> or Cloudflare Tunnels to expose your local port to the internet. Run this in your terminal:</p>
+                  <div className="docs-code-block" style={{ margin: '8px 0' }}>
+                    ngrok http 5000
+                  </div>
+                </div>
+              </div>
+              <div className="docs-step">
+                <div className="docs-step__num">3</div>
+                <div className="docs-step__content">
+                  <div className="docs-step__title">Target the public URL</div>
+                  <p className="docs-p">Ngrok will generate a secure public link (e.g., <code>https://a1b2c3d4.ngrok-free.app</code>). Copy this URL and paste it into StressLab's <strong>Target URL</strong> field!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </Layout>

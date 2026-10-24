@@ -84,6 +84,11 @@ export default function Results() {
           </span>
         </div>
 
+        {run.errorMessage && (
+          <div style={{ background: '#FEF2F2', border: '1px solid #FCA5A5', color: '#B91C1C', padding: '12px 16px', borderRadius: '8px', marginBottom: '20px', fontSize: '14px' }}>
+            <strong>Run Diagnostic:</strong> {run.errorMessage}
+          </div>
+        )}
         <div className="results-kpis">
           {[
             { label: 'Total requests', value: run.totalRequests?.toLocaleString() ?? '—', sub: 'fired' },

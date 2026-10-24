@@ -19,6 +19,8 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 @Component
 @RequiredArgsConstructor
@@ -30,6 +32,7 @@ public class LoadTestEngine {
     private final TestMetricRepository testMetricRepository;
     
     private final ConcurrentHashMap<Long, RunContext> activeRuns = new ConcurrentHashMap<>();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public static class RunContext {
         public final AtomicBoolean cancelled = new AtomicBoolean(false);
@@ -80,6 +83,7 @@ public class LoadTestEngine {
         AtomicInteger requestsSent = new AtomicInteger(0);
         AtomicInteger successCount = new AtomicInteger(0);
         AtomicInteger failCount    = new AtomicInteger(0);
+        java.util.concurrent.atomic.AtomicReference<String> firstFailureReason = new java.util.concurrent.atomic.AtomicReference<>(null);
 
         ConcurrentLinkedQueue<Long>    windowLatencies = new ConcurrentLinkedQueue<>();
         ConcurrentLinkedQueue<Boolean> windowResults   = new ConcurrentLinkedQueue<>();
@@ -162,14 +166,24 @@ public class LoadTestEngine {
                                 windowLatencies.offer(latency);
                                 windowResults.offer(ok);
                                 allLatencies.add(latency);
-                                if (ok) successCount.incrementAndGet();
-                                else    failCount.incrementAndGet();
+                                if (ok) {
+                                    successCount.incrementAndGet();
+                                } else {
+                                    failCount.incrementAndGet();
+                                    if (firstFailureReason.compareAndSet(null, "HTTP " + response.statusCode())) {
+                                        log.warn("First HTTP failure on run {}: status {}", runId, response.statusCode());
+                                    }
+                                }
                             } catch (Exception e) {
                                 long latency = System.currentTimeMillis() - start;
                                 windowLatencies.offer(latency);
                                 windowResults.offer(false);
                                 allLatencies.add(latency);
                                 failCount.incrementAndGet();
+                                String err = e.getClass().getSimpleName() + (e.getMessage() != null ? ": " + e.getMessage() : "");
+                                if (firstFailureReason.compareAndSet(null, err)) {
+                                    log.error("First network/request exception on run {}: {}", runId, err);
+                                }
                             } finally {
                                 requestsSent.incrementAndGet();
                                 latch.countDown();
@@ -193,6 +207,9 @@ public class LoadTestEngine {
         scheduler.shutdown();
 
         String errorMsg = run.getErrorMessage();
+        if (errorMsg == null && failCount.get() > 0 && successCount.get() == 0) {
+            errorMsg = "All requests failed. Reason: " + firstFailureReason.get();
+        }
         if (ctx.cancelled.get()) {
             errorMsg = "Stopped by user";
         }
@@ -205,6 +222,24 @@ public class LoadTestEngine {
                 .timeout(Duration.ofSeconds(30))
                 .header("User-Agent", "StressLab/1.0");
 
+        boolean hasContentType = false;
+        if (config.getRequestHeaders() != null && !config.getRequestHeaders().isBlank()) {
+            try {
+                Map<String, String> headers = objectMapper.readValue(
+                        config.getRequestHeaders(), new TypeReference<Map<String, String>>() {});
+                for (Map.Entry<String, String> entry : headers.entrySet()) {
+                    if (entry.getKey() != null && entry.getValue() != null && !entry.getKey().isBlank()) {
+                        b.header(entry.getKey().trim(), entry.getValue().trim());
+                        if ("content-type".equalsIgnoreCase(entry.getKey().trim())) {
+                            hasContentType = true;
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                log.warn("Failed to parse request headers JSON: {}", e.getMessage());
+            }
+        }
+
         String method = config.getHttpMethod().name();
         String body   = config.getRequestBody();
 
@@ -213,7 +248,9 @@ public class LoadTestEngine {
         } else {
             String reqBody = (body != null && !body.isBlank()) ? body : "{}";
             b.method(method, HttpRequest.BodyPublishers.ofString(reqBody));
-            b.header("Content-Type", "application/json");
+            if (!hasContentType) {
+                b.header("Content-Type", "application/json");
+            }
         }
         return b.build();
     }

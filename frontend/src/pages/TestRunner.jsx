@@ -47,8 +47,8 @@ export default function TestRunner() {
   useEffect(() => {
     api.get(`/api/runs/${runId}`).then(r => setRunInfo(r.data)).catch(() => {})
 
-    const wsProto = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
-    const wsUrl = `${wsProto}//${window.location.host}/ws`
+    // Connect directly to Render backend (Vercel serverless does not proxy WebSocket connections)
+    const wsUrl = window.location.hostname === 'localhost' ? 'ws://localhost:8080/ws' : 'wss://stresslab-backend.onrender.com/ws'
 
     const client = new Client({
       brokerURL: wsUrl,

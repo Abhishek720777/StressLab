@@ -4,11 +4,12 @@ FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 
 # Copy pom first for layer caching
-COPY pom.xml .
+# Paths are relative to repo root (Render uses repo root as build context)
+COPY backend/pom.xml .
 RUN mvn dependency:go-offline -B
 
 # Copy source and build
-COPY src ./src
+COPY backend/src ./src
 RUN mvn clean package -DskipTests -B
 
 # Stage 2: Run
